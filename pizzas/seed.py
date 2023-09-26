@@ -1,5 +1,5 @@
-from app import db
-from models import Pizza, Restaurant
+from pizzas.app import db
+from pizzas.models import Pizza, Restaurant
 
 # Function to create pizzas and restaurants
 def create_seed_data():
@@ -19,7 +19,7 @@ def create_seed_data():
 
 if __name__ == "__main__":
     # Initialize the Flask app and database
-    from app import app
+    from pizzas.app import app
     app.app_context().push()
     db.create_all()
 

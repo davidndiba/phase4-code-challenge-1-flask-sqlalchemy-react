@@ -1,12 +1,16 @@
+from config import Config
 from flask import Flask, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-from models import db, Restaurant, Pizza, RestaurantPizza  # Import the models from models.py
-from models import Config
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object(Config)  # Load the configuration from the Config class
-db.init_app(app)  # Initialize the db object with your Flask app
+db = SQLAlchemy()
+db.init_app(app)
+migrate = Migrate(app,db)
+
+# Rest of your code...
 
 # Routes
 @app.route('/restaurants', methods=['GET'])
@@ -62,6 +66,6 @@ def create_restaurant_pizza():
     return jsonify({'id': pizza.id, 'name': pizza.name, 'ingredients': pizza.ingredients})
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+        # db.create_all()
     app.run(debug=True)
