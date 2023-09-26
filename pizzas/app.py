@@ -1,17 +1,15 @@
 from config import Config
 from flask import Flask, request, jsonify, abort
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from flask_migrate import Migrate
-from models import RestaurantPizza, Restaurant, Pizza
+from models import RestaurantPizza, Restaurant, Pizza, db 
 
 app = Flask(__name__)
-app.config.from_object(Config)  # Load the configuration from the Config class
-db = SQLAlchemy()
-db.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurants.db' 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
 migrate = Migrate(app,db)
-
-# Rest of your code...
+db.init_app(app)
 
 # Routes
 @app.route('/restaurants', methods=['GET'])
@@ -67,6 +65,5 @@ def create_restaurant_pizza():
     return jsonify({'id': pizza.id, 'name': pizza.name, 'ingredients': pizza.ingredients})
 
 if __name__ == '__main__':
-    # with app.app_context():
-        # db.create_all()
-    app.run(debug=True)
+    
+    app.run(debug=True, port=5555)

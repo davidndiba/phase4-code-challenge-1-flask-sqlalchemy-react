@@ -1,4 +1,4 @@
-#!/home/user/Development/code/phase4/phase4-code-challenge-1-flask-sqlalchemy-react/pipfile/bin/python3
+#!/home/user/Development/code/phase4/phase4-code-challenge-1-flask-sqlalchemy-react/pipfile/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
