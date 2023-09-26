@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from flask_migrate import Migrate
+from models import RestaurantPizza, Restaurant, Pizza
 
 app = Flask(__name__)
 app.config.from_object(Config)  # Load the configuration from the Config class
@@ -62,7 +63,7 @@ def create_restaurant_pizza():
         db.session.rollback()
         return jsonify({'errors': ['validation errors']}), 400
 
-    pizza = Pizza.query.get(pizza_id)
+    pizza = pizza.query.get(pizza_id)
     return jsonify({'id': pizza.id, 'name': pizza.name, 'ingredients': pizza.ingredients})
 
 if __name__ == '__main__':
