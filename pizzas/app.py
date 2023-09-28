@@ -139,7 +139,7 @@ def create_restaurant_pizza():
         db.session.rollback()
         return jsonify({'errors': ['validation errors']}), 400
 
-    pizza = pizza.query.get(pizza_id)
+    pizza = Pizza.query.get(pizza_id)
     return jsonify({'id': pizza.id, 'name': pizza.name, 'ingredients': pizza.ingredients})
 
 
